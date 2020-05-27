@@ -12,10 +12,11 @@ public class TankFrame extends Frame {
 	 * 
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
-
+	//坦克
 	Tank myTank = new Tank(200, 200, Dir.DOWN);
-
-	Tank yourTank = new Tank(200, 200, Dir.DOWN);
+	
+	//子弹
+	Bullet bu = new Bullet(300, 300, Dir.DOWN);
 
 	Dir dir = Dir.DOWN;
 
@@ -86,19 +87,25 @@ public class TankFrame extends Frame {
 		}
 
 		private void setMainTankDir() {
-			if (bL)
-				dir = Dir.LEFT;
-			if (bR)
-				dir = Dir.RIGHT;
-			if (bU)
-				dir = Dir.UP;
-			if (bD)
-				dir = Dir.DOWN;
+			if (!bL && !bR && !bU && !bD) {
+				myTank.setMoving(false);
+			} else {
+				myTank.setMoving(true);
+				if (bL)
+					myTank.setDir(Dir.LEFT);
+				if (bR)
+					myTank.setDir(Dir.RIGHT);
+				if (bU)
+					myTank.setDir(Dir.UP);
+				if (bD)
+					myTank.setDir(Dir.DOWN);
+			}
 		}
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		myTank.paint(g);
+		bu.paint(g);
 	}
 }

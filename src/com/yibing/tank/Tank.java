@@ -10,6 +10,8 @@ import java.awt.Graphics;
 public class Tank {
 	private int x, y;
 	private Dir dir = Dir.DOWN;
+	private boolean moving = false;
+
 	private int speed = 10;
 
 	public Tank(int x, int y, Dir dir) {
@@ -21,6 +23,13 @@ public class Tank {
 
 	public void paint(Graphics g) {
 		g.fillRect(x, y, 50, 50);
+		this.move();
+	}
+
+	private void move() {
+		if (!moving) {
+			return;
+		}
 		switch (dir) {
 		case LEFT:
 			x -= speed;
@@ -50,4 +59,21 @@ public class Tank {
 			break;
 		}
 	}
+
+	public Dir getDir() {
+		return dir;
+	}
+
+	public void setDir(Dir dir) {
+		this.dir = dir;
+	}
+
+	public boolean isMoving() {
+		return moving;
+	}
+
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+
 }
