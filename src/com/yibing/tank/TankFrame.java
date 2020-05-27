@@ -12,7 +12,10 @@ public class TankFrame extends Frame {
 	 * 
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
+	
 	int x = 20, y = 20;
+	Dir dir = Dir.DOWN;
+	private static final int speed = 10;
 
 	public TankFrame() {
 		setSize(800, 600);
@@ -29,44 +32,97 @@ public class TankFrame extends Frame {
 		});
 	}
 
-	
 	class MyKeyListener extends KeyAdapter {
+		boolean bL = false;
+		boolean bR = false;
+		boolean bU = false;
+		boolean bD = false;
 
-		//按下键盘
+		// 按下键盘
 		@Override
 		public void keyPressed(KeyEvent e) {
 			System.out.println("pressed");
 			int key = e.getKeyCode();
 			switch (key) {
 			case KeyEvent.VK_LEFT:
-				x -= 10;
-				y -= 10;
+				bL = true;
 				break;
 			case KeyEvent.VK_RIGHT:
-				x += 10;
-				y += 10;
+				bR = true;
 				break;
 			case KeyEvent.VK_UP:
-				y -= 10;
+				bU = true;
 				break;
 			case KeyEvent.VK_DOWN:
-				y += 10;
+				bD = true;
 				break;
 			}
 
-			repaint();
+			setMainTankDir();
 		}
 
 		// 释放按键
 		@Override
 		public void keyReleased(KeyEvent e) {
 			System.out.println("released");
+			int key = e.getKeyCode();
+			switch (key) {
+			case KeyEvent.VK_LEFT:
+				bL = false;
+				break;
+			case KeyEvent.VK_RIGHT:
+				bR = false;
+				break;
+			case KeyEvent.VK_UP:
+				bU = false;
+				break;
+			case KeyEvent.VK_DOWN:
+				bD = false;
+				break;
+			}
+			setMainTankDir();
+		}
+		
+		private void setMainTankDir() {
+			if(bL) dir = Dir.LEFT;
+			if(bR) dir = Dir.RIGHT;
+			if(bU) dir = Dir.UP;
+			if(bD) dir = Dir.DOWN;
 		}
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		System.out.println("print");
+		
+		switch(dir) {
+		case LEFT:
+			x-=speed;
+			if(x <= 0) {
+				dir = Dir.RIGHT;
+			}
+			break;
+		case RIGHT:
+			x+=speed;
+			if(x>= 800) {
+				dir = Dir.LEFT;
+			}
+			break;
+		case UP:
+			y-=speed;
+			if(y <= 0) {
+				dir = Dir.DOWN;
+			}
+			break;
+		case DOWN:
+			y+=speed;
+			if(y >= 600) {
+				dir = Dir.UP;
+			}
+			break;
+		default:
+			break;
+		}
 		g.fillRect(x, y, 50, 50);
 		// x += 10;
 		// y += 10;
