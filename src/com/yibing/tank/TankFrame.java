@@ -139,5 +139,8 @@ public class TankFrame extends Frame {
 			bullets.get(i).paint(g);
 		}
 
+		/*
+		 * for (Bullet bullet : bullets) { bullet.paint(g); }
+		 */
 	}
 }
