@@ -15,7 +15,7 @@ public class TankFrame extends Frame {
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
 	// 坦克
-	Tank myTank = new Tank(200, 200, Dir.DOWN);
+	Tank myTank = new Tank(200, 200, Dir.DOWN,this);
 
 	// 子弹
 	Bullet bu = new Bullet(300, 300, Dir.DOWN);
@@ -86,6 +86,9 @@ public class TankFrame extends Frame {
 			case KeyEvent.VK_DOWN:
 				bD = false;
 				break;
+			case KeyEvent.VK_CONTROL:
+				myTank.fire();
+				break;
 			}
 			setMainTankDir();
 		}
@@ -116,7 +119,7 @@ public class TankFrame extends Frame {
 		}
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
-		gOffScreen.setColor(Color.BLACK);
+		gOffScreen.setColor(Color.WHITE);
 		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
