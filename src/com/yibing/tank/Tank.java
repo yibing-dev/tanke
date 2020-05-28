@@ -1,5 +1,6 @@
 package com.yibing.tank;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -12,7 +13,7 @@ public class Tank {
 	private Dir dir = Dir.DOWN;
 	private boolean moving = false;
 
-	private int speed = 10;
+	private int speed = 1;
 
 	public Tank(int x, int y, Dir dir) {
 		super();
@@ -22,6 +23,9 @@ public class Tank {
 	}
 
 	public void paint(Graphics g) {
+		Color c = g.getColor();
+		g.setColor(Color.YELLOW);
+		g.setColor(c);
 		g.fillRect(x, y, 50, 50);
 		this.move();
 	}
