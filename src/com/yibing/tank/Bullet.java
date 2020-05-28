@@ -3,6 +3,10 @@ package com.yibing.tank;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * @author yibing
+ *
+ */
 public class Bullet {
 	private static final int speed = 10;
 	private int x, y;

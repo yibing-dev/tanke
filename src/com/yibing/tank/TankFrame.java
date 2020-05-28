@@ -11,6 +11,10 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author yibing
+ *
+ */
 public class TankFrame extends Frame {
 	/**
 	 * 
