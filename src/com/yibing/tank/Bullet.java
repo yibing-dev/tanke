@@ -8,14 +8,22 @@ public class Bullet {
 	private int x, y;
 	private Dir dir;
 	private static final int WIDTH = 30, HEIGHT = 30;
+	// 子弹活着
+	private boolean live = true;
+	TankFrame tf = null;
 
-	public Bullet(int x, int y, Dir dir) {
+	public Bullet(int x, int y, Dir dir, TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.tf = tf;
 	}
 
 	public void paint(Graphics g) {
+		if (!live) {
+			tf.bullets.remove(this);
+		}
+
 		Color c = g.getColor();
 		g.setColor(Color.RED);// 设置颜色
 		g.fillOval(x, y, WIDTH, HEIGHT);// 设置出现的初始位置
@@ -39,6 +47,9 @@ public class Bullet {
 			break;
 		default:
 			break;
+		}
+		if (x <= 0 || y <= 0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
+			live = false;
 		}
 	}
 }
