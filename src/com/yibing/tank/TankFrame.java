@@ -138,12 +138,14 @@ public class TankFrame extends Frame {
 		g.setColor(c);
 		g.drawString("子弹的数量" + bullets.size(), 10, 60);
 		myTank.paint(g);
-
+		
+		//for循环遍历，可以规避集合并发异常
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).paint(g);
 		}
-
+		
 		/*
+		 * 迭代遍历，如果其他操作有对该容器执行删除操作，会导致并发操作异常
 		 * for (Bullet bullet : bullets) { bullet.paint(g); }
 		 */
 	}
