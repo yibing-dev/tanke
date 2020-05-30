@@ -21,7 +21,7 @@ public class TankFrame extends Frame {
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
 	// 坦克
-	Tank myTank = new Tank(200, 400, Dir.DOWN, this);
+	Tank myTank = new Tank(200, 400, Dir.DOWN, this, Group.Good);
 	// 子弹容器
 	List<Bullet> bullets = new ArrayList<>();
 	// 坦克容器
@@ -137,13 +137,11 @@ public class TankFrame extends Frame {
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.WHITE);
-		g.setColor(c);
 		g.drawString("子弹的数量" + bullets.size(), 10, 60);
 		g.drawString("敌方坦克的数量" + tanks.size(), 10, 80);
 		myTank.paint(g);
-
+		g.setColor(c);
 		// for循环遍历，可以规避集合并发异常
-
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).paint(g);
 		}

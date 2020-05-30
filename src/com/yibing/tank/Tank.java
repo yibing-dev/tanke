@@ -1,6 +1,7 @@
 package com.yibing.tank;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 /**
  * @author yibing
@@ -10,20 +11,23 @@ import java.awt.Graphics;
 public class Tank {
 	private int x, y;
 	private Dir dir = Dir.DOWN;
-	private boolean moving = false;
+	private boolean moving = true;
 	private TankFrame tf = null;
 	private boolean living = true;
+	private Random random = new Random();
+	private int speed = 1;
+	private Group group = Group.Bad;
 
-	private int speed = 10;
 	public static final int WIDTH = ResourceMgr.tankD.getWidth();
 	public static final int HEIGHT = ResourceMgr.tankD.getHeight();
 
-	public Tank(int x, int y, Dir dir, TankFrame tf) {
+	public Tank(int x, int y, Dir dir, TankFrame tf, Group group) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
+		this.group = group;
 	}
 
 	public void paint(Graphics g) {
@@ -85,13 +89,25 @@ public class Tank {
 		default:
 			break;
 		}
+		if (random.nextInt(10) > 5) {
+			this.fire();
+		}
+	}
+
+	private void randomDir() {
+
 	}
 
 	public void fire() {
 		int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
 		int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
-		tf.bullets.add(new Bullet(bx, by, this.dir, this.tf));
+		tf.bullets.add(new Bullet(bx, by, this.dir, this.tf, this.group));
+	}
+	
+	public void die() {
+		this.living = false;
+		tf.tanks.remove(this);
 	}
 
 	public Dir getDir() {
@@ -125,10 +141,17 @@ public class Tank {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	
 
-	public void die() {
-		this.living = false;
-		tf.tanks.remove(this);
+	public Group getGroup() {
+		return group;
 	}
+
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+
+	
 
 }
