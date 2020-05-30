@@ -82,10 +82,10 @@ public class Bullet {
 	}
 
 	// 子弹和坦克碰撞检测
-	public void collidWidth(Tank tank) {
+	public boolean collidWidth(Tank tank) {
 		//如果子弹和坦克是一伙的，则不销毁坦克
 		if(this.getGroup() == tank.getGroup()) {
-			return;
+			return false;
 		}
 		//TODO：用一个子弹的位置
 		
@@ -94,9 +94,12 @@ public class Bullet {
 		Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);
 		// 判断两个矩形是否相交，如果相交，则说明子弹和坦克是撞在一起了
 		if (rect1.intersects(rect2)) {
+			//爆炸
 			tank.die();
 			this.die();
+			return true;
 		}
+		return false;
 	}
 
 	// 碰撞之后让子弹销毁

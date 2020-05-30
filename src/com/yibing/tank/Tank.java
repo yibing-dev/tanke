@@ -152,6 +152,14 @@ public class Tank {
 		this.group = group;
 	}
 
-	
+	public TankFrame getTf() {
+		return tf;
+	}
 
+	public void setTf(TankFrame tf) {
+		this.tf = tf;
+	}
+
+	
+	
 }

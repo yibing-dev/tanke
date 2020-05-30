@@ -18,6 +18,7 @@ public class ResourceMgr {
 	// 定义一个ClassLoader，避免每一次都获取一次
 	static ClassLoader classLoader = null;
 
+	public static BufferedImage[] explodes = new BufferedImage[16];
 	// 定义静态代码块，在加载本类的时候回自动加载到内存里
 	static {
 		try {
@@ -32,6 +33,11 @@ public class ResourceMgr {
 			bulletU = ImageIO.read(classLoader.getResourceAsStream("images/bulletU.gif"));
 			bulletR = ImageIO.read(classLoader.getResourceAsStream("images/bulletR.gif"));
 			bulletD = ImageIO.read(classLoader.getResourceAsStream("images/bulletD.gif"));
+			// 加载爆炸图片
+			for (int i = 0; i < explodes.length; i++) {
+				int num = i + 1;
+				explodes[i] = ImageIO.read(classLoader.getResourceAsStream("images/e" + num + ".gif"));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

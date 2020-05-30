@@ -26,10 +26,13 @@ public class TankFrame extends Frame {
 	List<Bullet> bullets = new ArrayList<>();
 	// 坦克容器
 	List<Tank> tanks = new ArrayList<>();
-
+	
+	
 	Dir dir = Dir.DOWN;
 
 	static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+	
+	
 
 	public TankFrame() {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -153,10 +156,10 @@ public class TankFrame extends Frame {
 		// 子弹和坦克的碰撞检测
 		for (int i = 0; i < bullets.size(); i++) {
 			for (int j = 0; j < tanks.size(); j++) {
+				Explode e = new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this);
 				bullets.get(i).collidWidth(tanks.get(j));
 			}
 		}
-
 		/*
 		 * 迭代遍历，如果其他操作有对该容器执行删除操作，会导致并发操作异常 for (Bullet bullet : bullets) {
 		 * bullet.paint(g); }
