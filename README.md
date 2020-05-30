@@ -42,15 +42,15 @@ for (int i = 0; i < bullets.size(); i++) {
 ## 2020/5/30
 
 ##### 功能更新：
-
+* 根据按键方向显示不同方向的坦克icon
 
 ##### 开发要点记录：
-* 通过classLoader加载项目图片
+*  通过classLoader加载项目图片
 
 ``` java
 ImageTest.class.getClassLoader().getResourceAsStream("images/bulletD.gif")
 ```
-*  定义静态代码块，在加载本类的时候回自动加载到内存里
+*  定义静态代码块，在加载本类的时候会自动加载到内存里
 
 ``` java
 public class ResourceMgr {
