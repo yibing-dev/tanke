@@ -13,7 +13,7 @@ public class Tank {
 	private boolean moving = false;
 	private TankFrame tf = null;
 
-	private int speed = 1;
+	private int speed = 10;
 
 	public Tank(int x, int y, Dir dir, TankFrame tf) {
 		super();
@@ -24,7 +24,23 @@ public class Tank {
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(ResourceMgr.tankL, x, y, null);
+		switch (dir) {
+		case LEFT:
+			g.drawImage(ResourceMgr.tankL, x, y, null);
+			break;
+		case RIGHT:
+			g.drawImage(ResourceMgr.tankR, x, y, null);
+			break;
+		case UP:
+			g.drawImage(ResourceMgr.tankU, x, y, null);
+			break;
+		case DOWN:
+			g.drawImage(ResourceMgr.tankD, x, y, null);
+			break;
+		default:
+			break;
+
+		}
 		this.move();
 	}
 
