@@ -1,6 +1,7 @@
 package com.yibing.tank;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * @author yibing
@@ -13,20 +14,20 @@ public class Bullet {
 	
 	public static final int WIDTH = ResourceMgr.bulletD.getWidth();
 	public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
-	
+
 	// 子弹活着
-	private boolean live = true; 
+	private boolean living = true;
 	TankFrame tf = null;
 
 	public Bullet(int x, int y, Dir dir, TankFrame tf) {
 		this.x = x;
-		this.y = y; 
+		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
 	}
 
 	public void paint(Graphics g) {
-		if (!live) {
+		if (!living) {
 			tf.bullets.remove(this);
 		}
 
@@ -51,6 +52,9 @@ public class Bullet {
 	}
 
 	private void move() {
+		if (!living) {
+			return;
+		}
 		switch (dir) {
 		case LEFT:
 			x -= speed;
@@ -67,9 +71,28 @@ public class Bullet {
 		default:
 			break;
 		}
-		//让子弹自动销毁
+		// 让子弹自动销毁
 		if (x <= 0 || y <= 0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
-			live = false;
+			living = false;
 		}
 	}
+
+	// 子弹和坦克碰撞检测
+	public void collidWidth(Tank tank) {
+		//根据字段位置和子弹的宽高，以及坦克的位置和宽高生成两个矩形
+		Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+		Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);
+		//判断两个矩形是否相交，如果相交，则说明子弹和坦克是撞在一起了
+		if(rect1.intersects(rect2)) {
+			tank.die();
+			this.die();
+		}
+	}
+
+	//碰撞之后让子弹销毁
+	private void die() {
+		this.living = false;
+		tf.bullets.remove(this);
+	}
+
 }

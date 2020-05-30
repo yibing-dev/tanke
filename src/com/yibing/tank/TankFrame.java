@@ -126,7 +126,7 @@ public class TankFrame extends Frame {
 		}
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
-		gOffScreen.setColor(Color.BLACK);
+		gOffScreen.setColor(Color.darkGray);
 		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
@@ -136,19 +136,27 @@ public class TankFrame extends Frame {
 	@Override
 	public void paint(Graphics g) {
 		Color c = g.getColor();
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.setColor(c);
 		g.drawString("子弹的数量" + bullets.size(), 10, 60);
+		g.drawString("敌方坦克的数量" + tanks.size(), 10, 80);
 		myTank.paint(g);
 
 		// for循环遍历，可以规避集合并发异常
-		
+
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).paint(g);
 		}
-		//画敌方坦克
+		// 画敌方坦克
 		for (int i = 0; i < tanks.size(); i++) {
 			tanks.get(i).paint(g);
+		}
+
+		// 子弹和坦克的碰撞检测
+		for (int i = 0; i < bullets.size(); i++) {
+			for (int j = 0; j < tanks.size(); j++) {
+				bullets.get(i).collidWidth(tanks.get(j));
+			}
 		}
 
 		/*
