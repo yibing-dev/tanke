@@ -1,6 +1,5 @@
 package com.yibing.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -11,7 +10,10 @@ public class Bullet {
 	private static final int speed = 10;
 	private int x, y;
 	private Dir dir;
-	private static final int WIDTH = 30, HEIGHT = 30;
+	
+	public static final int WIDTH = ResourceMgr.bulletD.getWidth();
+	public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
+	
 	// 子弹活着
 	private boolean live = true; 
 	TankFrame tf = null;
