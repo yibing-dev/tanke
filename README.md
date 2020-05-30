@@ -8,7 +8,11 @@
 * 结束时间:开发ing 
 
 ## 使用到的设计模式或技术
-> 待更新......
+* NIO
+* Netty
+*    设计模式 
+
+* 正在更新......
 
 
 
@@ -35,5 +39,31 @@ for (int i = 0; i < bullets.size(); i++) {
     bullets.get(i).paint(g);
 }
 ```
+## 2020/5/30
+
+##### 功能更新：
 
 
+##### 开发要点记录：
+* 通过classLoader加载项目图片
+
+``` java
+ImageTest.class.getClassLoader().getResourceAsStream("images/bulletD.gif")
+```
+*  定义静态代码块，在加载本类的时候回自动加载到内存里
+
+``` java
+public class ResourceMgr {
+    static BufferedImage tankL, tankU, tankR, tankD;
+    static {
+        try {
+            tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
+            tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
+            tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
+            tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
