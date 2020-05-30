@@ -52,6 +52,7 @@ public class Bullet {
 		default:
 			break;
 		}
+		//让子弹自动销毁
 		if (x <= 0 || y <= 0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
 			live = false;
 		}
