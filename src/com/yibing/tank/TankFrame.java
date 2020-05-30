@@ -21,9 +21,11 @@ public class TankFrame extends Frame {
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
 	// 坦克
-	Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+	Tank myTank = new Tank(200, 400, Dir.DOWN, this);
 	// 子弹容器
 	List<Bullet> bullets = new ArrayList<>();
+	// 坦克容器
+	List<Tank> tanks = new ArrayList<>();
 
 	Dir dir = Dir.DOWN;
 
@@ -133,20 +135,25 @@ public class TankFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor(); 
+		Color c = g.getColor();
 		g.setColor(Color.BLACK);
 		g.setColor(c);
 		g.drawString("子弹的数量" + bullets.size(), 10, 60);
 		myTank.paint(g);
+
+		// for循环遍历，可以规避集合并发异常
 		
-		//for循环遍历，可以规避集合并发异常
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).paint(g);
 		}
-		
+		//画敌方坦克
+		for (int i = 0; i < tanks.size(); i++) {
+			tanks.get(i).paint(g);
+		}
+
 		/*
-		 * 迭代遍历，如果其他操作有对该容器执行删除操作，会导致并发操作异常
-		 * for (Bullet bullet : bullets) { bullet.paint(g); }
+		 * 迭代遍历，如果其他操作有对该容器执行删除操作，会导致并发操作异常 for (Bullet bullet : bullets) {
+		 * bullet.paint(g); }
 		 */
 	}
 }
