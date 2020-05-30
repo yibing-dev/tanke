@@ -1,6 +1,5 @@
 package com.yibing.tank;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -25,10 +24,7 @@ public class Tank {
 	}
 
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.YELLOW);
-		g.setColor(c);
-		g.fillRect(x, y, 50, 50);
+		g.drawImage(ResourceMgr.tankL, x, y, null);
 		this.move();
 	}
 
@@ -67,7 +63,7 @@ public class Tank {
 	}
 
 	public void fire() {
-		tf.bullets.add(new Bullet(this.x, this.y, this.dir,this.tf));
+		tf.bullets.add(new Bullet(this.x, this.y, this.dir, this.tf));
 	}
 
 	public Dir getDir() {
