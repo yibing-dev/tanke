@@ -124,7 +124,7 @@ public class TankFrame extends Frame {
 		}
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
-		gOffScreen.setColor(Color.WHITE);
+		gOffScreen.setColor(Color.BLACK);
 		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
@@ -133,7 +133,7 @@ public class TankFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
+		Color c = g.getColor(); 
 		g.setColor(Color.BLACK);
 		g.setColor(c);
 		g.drawString("子弹的数量" + bullets.size(), 10, 60);
