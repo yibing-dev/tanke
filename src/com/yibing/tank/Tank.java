@@ -21,7 +21,7 @@ public class Tank {
 	public static final int WIDTH = ResourceMgr.tankD.getWidth();
 	public static final int HEIGHT = ResourceMgr.tankD.getHeight();
 
-	public Tank(int x, int y, Dir dir, TankFrame tf, Group group,int speed) {
+	public Tank(int x, int y, Dir dir, TankFrame tf, Group group, int speed) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -90,13 +90,17 @@ public class Tank {
 		default:
 			break;
 		}
-		if (random.nextInt(10) > 5) {
-			//this.fire();
+		if (this.group == Group.Bad) {
+			if (random.nextInt(10) > 5) {
+				this.fire();
+			}
+			randomDir();
 		}
 	}
 
 	private void randomDir() {
-
+		//随机获取枚举类的下标，返回随机的方向
+		this.dir = Dir.values()[random.nextInt(4)];
 	}
 
 	public void fire() {
@@ -104,9 +108,10 @@ public class Tank {
 		int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
 		tf.bullets.add(new Bullet(bx, by, this.dir, this.tf, this.group));
-		if(this.group == Group.Good) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+		if (this.group == Group.Good)
+			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
 	}
-	
+
 	public void die() {
 		this.living = false;
 		tf.tanks.remove(this);
@@ -143,8 +148,6 @@ public class Tank {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	
 
 	public Group getGroup() {
 		return group;
@@ -162,6 +165,4 @@ public class Tank {
 		this.tf = tf;
 	}
 
-	
-	
 }

@@ -32,7 +32,7 @@ public class TankFrame extends Frame {
 	
 	Dir dir = Dir.DOWN;
 
-	static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+	static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
 	
 	
 
