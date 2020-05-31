@@ -99,8 +99,10 @@ public class Tank {
 	}
 
 	private void randomDir() {
-		//随机获取枚举类的下标，返回随机的方向
-		this.dir = Dir.values()[random.nextInt(4)];
+		// 随机获取枚举类的下标，返回随机的方向
+		if (random.nextInt(100) > 95) {
+			this.dir = Dir.values()[random.nextInt(4)];
+		}
 	}
 
 	public void fire() {
