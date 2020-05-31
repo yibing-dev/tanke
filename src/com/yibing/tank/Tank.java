@@ -1,6 +1,7 @@
 package com.yibing.tank;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.Random;
 
 /**
@@ -17,6 +18,7 @@ public class Tank {
 	private Random random = new Random();
 	private int speed = 10;
 	private Group group = Group.Bad;
+	Rectangle rect = new Rectangle();
 
 	public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
@@ -29,6 +31,10 @@ public class Tank {
 		this.tf = tf;
 		this.group = group;
 		this.speed = speed;
+		this.rect.x = this.x;
+		this.rect.y = this.y;
+		this.rect.height = this.HEIGHT;
+		this.rect.width = this.WIDTH;
 	}
 
 	public void paint(Graphics g) {
@@ -65,27 +71,15 @@ public class Tank {
 		switch (dir) {
 		case LEFT:
 			x -= speed;
-			if (x <= 0) {
-				dir = Dir.RIGHT;
-			}
 			break;
 		case RIGHT:
 			x += speed;
-			if (x >= 800) {
-				dir = Dir.LEFT;
-			}
 			break;
 		case UP:
 			y -= speed;
-			if (y <= 0) {
-				dir = Dir.DOWN;
-			}
 			break;
 		case DOWN:
 			y += speed;
-			if (y >= 600) {
-				dir = Dir.UP;
-			}
 			break;
 		default:
 			break;
@@ -95,6 +89,25 @@ public class Tank {
 				this.fire();
 			}
 			randomDir();
+		}
+		boundsCheck();
+		this.rect.x = this.x;
+		this.rect.y = this.y;
+	}
+
+	// 边界检测
+	private void boundsCheck() {
+		if (this.x < 0) {
+			this.x = 0;
+		}
+		if (this.y < 30) {
+			this.y = 30;
+		}
+		if (this.x > TankFrame.GAME_WIDTH - this.WIDTH) {
+			x = TankFrame.GAME_WIDTH - this.WIDTH;
+		}
+		if (this.y > TankFrame.GAME_HEIGHT - this.HEIGHT) {
+			y = TankFrame.GAME_HEIGHT - this.HEIGHT;
 		}
 	}
 

@@ -21,20 +21,17 @@ public class TankFrame extends Frame {
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
 	// 坦克
-	Tank myTank = new Tank(200, 400, Dir.DOWN, this, Group.Good,15);
+	Tank myTank = new Tank(200, 400, Dir.DOWN, this, Group.Good, 15);
 	// 子弹容器
 	List<Bullet> bullets = new ArrayList<>();
 	// 坦克容器
 	List<Tank> tanks = new ArrayList<>();
-	//爆炸集合
+	// 爆炸集合
 	List<Explode> explodes = new ArrayList<>();
-	
-	
+
 	Dir dir = Dir.DOWN;
 
 	static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
-	
-	
 
 	public TankFrame() {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -163,7 +160,7 @@ public class TankFrame extends Frame {
 				bullets.get(i).collidWidth(tanks.get(j));
 			}
 		}
-		
+
 		for (int i = 0; i < explodes.size(); i++) {
 			explodes.get(i).paint(g);
 		}

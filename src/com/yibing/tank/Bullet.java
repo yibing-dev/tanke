@@ -15,12 +15,12 @@ public class Bullet {
 	public static final int WIDTH = ResourceMgr.bulletD.getWidth();
 	public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
 
+	Rectangle rect = new Rectangle();
+
 	// 子弹活着
 	private boolean living = true;
 	TankFrame tf = null;
 	private Group group = Group.Bad;
-
-	
 
 	public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
 		this.x = x;
@@ -28,6 +28,10 @@ public class Bullet {
 		this.dir = dir;
 		this.tf = tf;
 		this.group = group;
+		this.rect.x = this.x;
+		this.rect.y = this.y;
+		this.rect.width = this.WIDTH;
+		this.rect.height = this.HEIGHT;
 	}
 
 	public void paint(Graphics g) {
@@ -75,6 +79,9 @@ public class Bullet {
 		default:
 			break;
 		}
+		this.rect.x = this.x;
+		this.rect.y = this.y;
+
 		// 让子弹自动销毁
 		if (x <= 0 || y <= 0 || x >= TankFrame.GAME_WIDTH || y >= TankFrame.GAME_HEIGHT) {
 			living = false;
@@ -83,23 +90,20 @@ public class Bullet {
 
 	// 子弹和坦克碰撞检测
 	public boolean collidWidth(Tank tank) {
-		//如果子弹和坦克是一伙的，则不销毁坦克
-		if(this.getGroup() == tank.getGroup()) {
+		// 如果子弹和坦克是一伙的，则不销毁坦克
+		if (this.getGroup() == tank.getGroup()) {
 			return false;
 		}
-		//TODO：用一个子弹的位置
-		
+		// TODO：用一个子弹的位置
 		// 根据字段位置和子弹的宽高，以及坦克的位置和宽高生成两个矩形
-		Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-		Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);
 		// 判断两个矩形是否相交，如果相交，则说明子弹和坦克是撞在一起了
-		if (rect1.intersects(rect2)) {
-			//爆炸
+		if (this.rect.intersects(tank.rect)) {
+			// 爆炸
 			int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 			int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 			Explode e = new Explode(ex, ey, tf);
 			this.tf.explodes.add(e);
-			//销毁坦克和子弹
+			// 销毁坦克和子弹
 			tank.die();
 			this.die();
 			return true;
@@ -112,7 +116,7 @@ public class Bullet {
 		this.living = false;
 		tf.bullets.remove(this);
 	}
-	
+
 	public Group getGroup() {
 		return group;
 	}

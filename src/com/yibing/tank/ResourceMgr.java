@@ -31,16 +31,13 @@ public class ResourceMgr {
 			goodTankL = ImageUtil.rotateImage(goodTankU, -90);
 			goodTankR = ImageUtil.rotateImage(goodTankU, 90);
 			goodTankD = ImageUtil.rotateImage(goodTankU, 180);
-			
+
 			badTankU = ImageIO.read(classLoader.getResourceAsStream("images/BadTank1.png"));
 			badTankL = ImageUtil.rotateImage(badTankU, -90);
 			badTankR = ImageUtil.rotateImage(badTankU, 90);
 			badTankD = ImageUtil.rotateImage(badTankU, 180);
-			
-			
-			
-			// 加载子弹icon
 
+			// 加载子弹icon
 			bulletU = ImageIO.read(classLoader.getResourceAsStream("images/bulletU.gif"));
 			bulletL = ImageUtil.rotateImage(bulletU, -90);
 			bulletR = ImageUtil.rotateImage(bulletU, 90);
