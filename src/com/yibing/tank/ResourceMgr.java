@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.yibing.Utils.ImageUtil;
+
 /**
  * @Author yibing
  * @CreateTime 2020年5月30日 上午10:00:43
@@ -24,15 +26,16 @@ public class ResourceMgr {
 		try {
 			classLoader = ResourceMgr.class.getClassLoader();
 			// 加载坦克icon
-			tankL = ImageIO.read(classLoader.getResourceAsStream("images/tankL.gif"));
-			tankR = ImageIO.read(classLoader.getResourceAsStream("images/tankR.gif"));
-			tankU = ImageIO.read(classLoader.getResourceAsStream("images/tankU.gif"));
-			tankD = ImageIO.read(classLoader.getResourceAsStream("images/tankD.gif"));
+			tankU = ImageIO.read(classLoader.getResourceAsStream("images/BadTank1.png"));
+			tankL = ImageUtil.rotateImage(tankU, -90);
+			tankR = ImageUtil.rotateImage(tankU, 90);
+			tankD = ImageUtil.rotateImage(tankU, 180);
 			// 加载子弹icon
-			bulletL = ImageIO.read(classLoader.getResourceAsStream("images/bulletL.gif"));
+			
 			bulletU = ImageIO.read(classLoader.getResourceAsStream("images/bulletU.gif"));
-			bulletR = ImageIO.read(classLoader.getResourceAsStream("images/bulletR.gif"));
-			bulletD = ImageIO.read(classLoader.getResourceAsStream("images/bulletD.gif"));
+			bulletL = ImageUtil.rotateImage(bulletU, -90);
+			bulletR = ImageUtil.rotateImage(bulletU, 90);
+			bulletD = ImageUtil.rotateImage(bulletU, 180);
 			// 加载爆炸图片
 			for (int i = 0; i < explodes.length; i++) {
 				int num = i + 1;
