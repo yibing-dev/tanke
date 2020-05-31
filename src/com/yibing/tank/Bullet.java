@@ -94,6 +94,8 @@ public class Bullet {
 		Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), tank.WIDTH, tank.HEIGHT);
 		// 判断两个矩形是否相交，如果相交，则说明子弹和坦克是撞在一起了
 		if (rect1.intersects(rect2)) {
+			Explode ex = new Explode(x, y, tf);
+			this.tf.explodes.add(ex);
 			//爆炸
 			tank.die();
 			this.die();

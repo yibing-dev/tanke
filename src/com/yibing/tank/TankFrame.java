@@ -21,11 +21,13 @@ public class TankFrame extends Frame {
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
 	// 坦克
-	Tank myTank = new Tank(200, 400, Dir.DOWN, this, Group.Good);
+	Tank myTank = new Tank(200, 400, Dir.DOWN, this, Group.Good,15);
 	// 子弹容器
 	List<Bullet> bullets = new ArrayList<>();
 	// 坦克容器
 	List<Tank> tanks = new ArrayList<>();
+	//爆炸集合
+	List<Explode> explodes = new ArrayList<>();
 	
 	
 	Dir dir = Dir.DOWN;
@@ -142,6 +144,7 @@ public class TankFrame extends Frame {
 		g.setColor(Color.WHITE);
 		g.drawString("子弹的数量" + bullets.size(), 10, 60);
 		g.drawString("敌方坦克的数量" + tanks.size(), 10, 80);
+		g.drawString("爆炸的数量" + explodes.size(), 10, 100);
 		myTank.paint(g);
 		g.setColor(c);
 		// for循环遍历，可以规避集合并发异常
@@ -159,6 +162,10 @@ public class TankFrame extends Frame {
 				Explode e = new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this);
 				bullets.get(i).collidWidth(tanks.get(j));
 			}
+		}
+		
+		for (int i = 0; i < explodes.size(); i++) {
+			explodes.get(i).paint(g);
 		}
 		/*
 		 * 迭代遍历，如果其他操作有对该容器执行删除操作，会导致并发操作异常 for (Bullet bullet : bullets) {

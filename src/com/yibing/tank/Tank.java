@@ -15,19 +15,20 @@ public class Tank {
 	private TankFrame tf = null;
 	private boolean living = true;
 	private Random random = new Random();
-	private int speed = 1;
+	private int speed = 10;
 	private Group group = Group.Bad;
 
 	public static final int WIDTH = ResourceMgr.tankD.getWidth();
 	public static final int HEIGHT = ResourceMgr.tankD.getHeight();
 
-	public Tank(int x, int y, Dir dir, TankFrame tf, Group group) {
+	public Tank(int x, int y, Dir dir, TankFrame tf, Group group,int speed) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
 		this.group = group;
+		this.speed = speed;
 	}
 
 	public void paint(Graphics g) {
@@ -90,7 +91,7 @@ public class Tank {
 			break;
 		}
 		if (random.nextInt(10) > 5) {
-			this.fire();
+			//this.fire();
 		}
 	}
 
@@ -103,6 +104,7 @@ public class Tank {
 		int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
 		tf.bullets.add(new Bullet(bx, by, this.dir, this.tf, this.group));
+		if(this.group == Group.Good) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
 	}
 	
 	public void die() {
