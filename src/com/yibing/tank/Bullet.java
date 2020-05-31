@@ -8,7 +8,7 @@ import java.awt.Rectangle;
  *
  */
 public class Bullet {
-	private static final int speed = 10;
+	private static final int speed = 100;
 	private int x, y;
 	private Dir dir;
 

@@ -18,8 +18,8 @@ public class Tank {
 	private int speed = 10;
 	private Group group = Group.Bad;
 
-	public static final int WIDTH = ResourceMgr.tankD.getWidth();
-	public static final int HEIGHT = ResourceMgr.tankD.getHeight();
+	public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
+	public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
 	public Tank(int x, int y, Dir dir, TankFrame tf, Group group, int speed) {
 		super();
@@ -37,16 +37,16 @@ public class Tank {
 		}
 		switch (dir) {
 		case LEFT:
-			g.drawImage(ResourceMgr.tankL, x, y, null);
+			g.drawImage(this.group == Group.Good ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y, null);
 			break;
 		case RIGHT:
-			g.drawImage(ResourceMgr.tankR, x, y, null);
+			g.drawImage(this.group == Group.Good ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y, null);
 			break;
 		case UP:
-			g.drawImage(ResourceMgr.tankU, x, y, null);
+			g.drawImage(this.group == Group.Good ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);
 			break;
 		case DOWN:
-			g.drawImage(ResourceMgr.tankD, x, y, null);
+			g.drawImage(this.group == Group.Good ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y, null);
 			break;
 		default:
 			break;
