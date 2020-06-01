@@ -13,6 +13,16 @@ import com.yibing.Utils.ImageUtil;
  * @Description 类描述: 图片资源管理类
  */
 public class ResourceMgr {
+	private ResourceMgr() {}
+
+	private static class ResourceMgrInner {
+		private static ResourceMgr INSTANCE = new ResourceMgr();
+	}
+
+	static ResourceMgr getInstance() {
+		return ResourceMgrInner.INSTANCE;
+	}
+
 	// 坦克icon
 	static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
 	static BufferedImage badTankL, badTankU, badTankR, badTankD;
@@ -21,7 +31,7 @@ public class ResourceMgr {
 	// 定义一个ClassLoader，避免每一次都获取一次
 	static ClassLoader classLoader = null;
 
-	public static BufferedImage[] explodes = new BufferedImage[16];
+	static BufferedImage[] explodes = new BufferedImage[16];
 	// 定义静态代码块，在加载本类的时候回自动加载到内存里
 	static {
 		try {

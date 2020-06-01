@@ -8,8 +8,8 @@ import java.awt.Graphics;
  */
 public class Explode {
 
-	public static final int WIDTH = ResourceMgr.explodes[0].getWidth();
-	public static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
+	public static final int WIDTH = ResourceMgr.getInstance().explodes[0].getWidth();
+	public static final int HEIGHT = ResourceMgr.getInstance().explodes[0].getHeight();
 
 	private int x, y;
 	private boolean living = true;

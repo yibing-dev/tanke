@@ -103,5 +103,94 @@ Dir.values()[random.nextInt(4)];
 
 * 目前写的代码是属于直肠子型的，相对来说比较简单，缺什么功能直接堆代码，没有任何设计模式可言，接下来要针对这几天的代码进行重构！！！不进行CodeReview的码农不是程序员 [大笑脸]
 
+## 2020/6/2
+
+##### 功能更新：
+* 把资源文件加载类改为单例模式
+* 把配置文件加载类改为单例模式
+
+##### 开发要点记录：
+
+* 4种常见的单例模式(Singleton) --> 应用场景：只需要一个实例存在，比如各种的manager类和各种的factory类
+
+* 饿汉式
+
+``` java
+/**
+ * 类加载到内存后，就会实例化一个单例，JVM保证线程安全
+ * 简单实用，推荐使用
+ * 唯一缺点：不管用到与否，类装载的时候都会被实例化
+ */
+public class Mgr01 {
+    private static final Mgr01 INSTANCE = new Mgr01();
+    // 禁止new
+    private Mgr01() {};
+    // 初始化方法
+    public static Mgr01 getInstance() {
+        return INSTANCE;
+    }
+}
+```
+
+* 懒汉式
+
+``` java
+public class Mgr02 {
+    private Mgr02() {}
+    
+    static Mgr02 INSTANCE = null;
+
+    static Mgr02 getInstance() {
+        if (INSTANCE == null) {
+            synchronized (Mgr02.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new Mgr02();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+}
+```
+
+* 使用静态内部类只加载一次的特性实现单例
+
+``` java
+public class Mgr03 {
+    private Mgr03() {
+    }
+
+    private static class Mgr03Inner {
+        static Mgr03 INSTANCE = new Mgr03();
+    }
+
+    static Mgr03 getInstance() {
+        return Mgr03Inner.INSTANCE;
+    }
+
+}
+```
+
+* 使用枚举实现单例
+
+``` java
+public enum Mgr04 {
+    INSTANCE;
+    
+    private User user;
+    
+    private Mgr04() {
+        user = new User();
+    }
+    
+    private User getUser() {
+        return user;
+    }
+    
+    static User getInstance() {
+        return Mgr04.INSTANCE.getInstance();
+    }
+}
+```
 
 

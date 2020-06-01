@@ -9,21 +9,28 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertyMgr {
-	static Properties props = new Properties();
+	private PropertyMgr() {}
+	private static class PropertyMgrInner{
+		private static Properties props = new Properties();
+	}
+	
+	static Properties getInstance() {
+		return PropertyMgrInner.props;
+	}
 
 	static {
 		try {
-			props.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config.properties"));
+			PropertyMgr.getInstance().load(PropertyMgr.class.getClassLoader().getResourceAsStream("config.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static Object get(String key) {
-		if (props == null) {
+		if (PropertyMgr.getInstance() == null) {
 			return null;
 		}
-		return props.get(key);
+		return PropertyMgr.getInstance().get(key);
 	}
 	
 	
