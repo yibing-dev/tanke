@@ -135,7 +135,7 @@ public class Mgr01 {
 public class Mgr02 {
     private Mgr02() {}
     
-    static Mgr02 INSTANCE = null;
+    static volatile Mgr02 INSTANCE = null;//加volatile 的原因是禁止指令重排序
 
     static Mgr02 getInstance() {
         if (INSTANCE == null) {
@@ -169,6 +169,7 @@ public class Mgr03 {
 ```
 
 * 使用枚举实现单例
+* 枚举类不能被反序列化的原因：没有构造方法
 
 ``` java
 public enum Mgr04 {
