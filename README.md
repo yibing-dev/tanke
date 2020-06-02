@@ -103,56 +103,14 @@ Dir.values()[random.nextInt(4)];
 ## 2020/6/2
 
 ##### 功能更新：
-* 把资源文件加载类改为单例模式
-* 把配置文件加载类改为单例模式
+* 把资源文件加载类改为单例模式（静态内部类式）
+* 把配置文件加载类改为单例模式（静态内部类式）
 
 ##### 开发要点记录：
-
-* 4种常见的单例模式(Singleton) --> 应用场景：只需要一个实例存在，比如各种的manager类和各种的factory类
-
-* 饿汉式
+* 单例模式总结： https://github.com/yibing-dev/DesignPatterns/blob/master/%E5%8D%95%E4%BE%8B.md
 
 ``` java
-/**
- * 类加载到内存后，就会实例化一个单例，JVM保证线程安全
- * 简单实用，推荐使用
- * 唯一缺点：不管用到与否，类装载的时候都会被实例化
- */
-public class Mgr01 {
-    private static final Mgr01 INSTANCE = new Mgr01();
-    // 禁止new
-    private Mgr01() {};
-    // 初始化方法
-    public static Mgr01 getInstance() {
-        return INSTANCE;
-    }
-}
-```
-
-* 懒汉式
-
-``` java
-public class Mgr02 {
-    private Mgr02() {}
-    
-    static volatile Mgr02 INSTANCE = null;//加volatile 的原因是禁止指令重排序
-
-    static Mgr02 getInstance() {
-        if (INSTANCE == null) {
-            synchronized (Mgr02.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new Mgr02();
-                }
-            }
-        }
-        return INSTANCE;
-    }
-}
-```
-
-* 使用静态内部类只加载一次的特性实现单例
-
-``` java
+//使用静态内部类只加载一次的特性实现单例
 public class Mgr03 {
     private Mgr03() {
     }
@@ -168,27 +126,5 @@ public class Mgr03 {
 }
 ```
 
-* 使用枚举实现单例
-* 枚举类不能被反序列化的原因：没有构造方法
-
-``` java
-public enum Mgr04 {
-    INSTANCE;
-    
-    private User user;
-    
-    private Mgr04() {
-        user = new User();
-    }
-    
-    private User getUser() {
-        return user;
-    }
-    
-    static User getInstance() {
-        return Mgr04.INSTANCE.getInstance();
-    }
-}
-```
 
 
