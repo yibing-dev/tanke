@@ -126,5 +126,80 @@ public class Mgr03 {
 }
 ```
 
+## 2020/6/3
+
+##### 功能更新：
+* 定义坦克的发火策略，并且把策略实例定义为单例
+
+##### 开发要点记录：
+* 策略模式总结： 
+
+* 定义一个发火策略的接口
+
+``` java
+public interface FireStrategy {
+	void fire(Tank t);
+}
+```
+
+* 定义默认的发火策略
+
+``` java
+public class DefaultFireStrategy implements FireStrategy {
+	//为了避免每次使用发火策略都new对象，因此设计为单例模式
+	private DefaultFireStrategy() {}
+	
+	
+	static class innerClass {
+		private static DefaultFireStrategy INSTANCE = new DefaultFireStrategy();
+	}
+	
+	static DefaultFireStrategy getInstance() {
+		return innerClass.INSTANCE;
+	}
+
+	@Override
+	public void fire(Tank t) {
+		int bx = t.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+		int by = t.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+		new Bullet(bx, by, t.dir, t.tf, t.group);
+		if (t.group == Group.Good) {
+			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+		}
+	}
+}
+
+```
+
+* 定义四个方向发火的发火策略
+
+``` java
+public class FourDirFireStrategy implements FireStrategy {
+
+	private FourDirFireStrategy() {}
+
+	private static class innerClass {
+		static FourDirFireStrategy INSTANCE = new FourDirFireStrategy();
+	}
+
+	static FourDirFireStrategy getInstance() {
+		return innerClass.INSTANCE;
+	}
+
+	@Override
+	public void fire(Tank t) {
+		int bx = t.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+		int by = t.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+		Dir[] dir = Dir.values();
+		for (Dir d : dir) {
+			new Bullet(bx, by, d, t.tf, t.group);
+		}
+		if (t.group == Group.Good) {
+			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+		}
+	}
+}
+```
+
 
 

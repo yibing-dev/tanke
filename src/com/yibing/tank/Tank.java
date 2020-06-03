@@ -10,14 +10,14 @@ import java.util.Random;
  *         抽象类
  */
 public class Tank {
-	private int x, y;
-	private Dir dir = Dir.DOWN;
+	int x, y;
+	Dir dir = Dir.DOWN;
 	private boolean moving = true;
-	private TankFrame tf = null;
+	TankFrame tf = null;
 	private boolean living = true;
 	private Random random = new Random();
 	private int speed = 10;
-	private Group group = Group.Bad;
+	Group group = Group.Bad;
 	Rectangle rect = new Rectangle();
 
 	public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
@@ -86,7 +86,8 @@ public class Tank {
 		}
 		if (this.group == Group.Bad) {
 			if (random.nextInt(10) > 5) {
-				this.fire();
+				//this.fire(DefaultFireStrategy.getInstance());
+				this.fire(FourDirFireStrategy.getInstance());
 			}
 			randomDir();
 		}
@@ -118,13 +119,11 @@ public class Tank {
 		}
 	}
 
-	public void fire() {
-		int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-		int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-
-		tf.bullets.add(new Bullet(bx, by, this.dir, this.tf, this.group));
-		if (this.group == Group.Good)
-			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+	/**
+	 * @param strategy 开火策略
+	 */
+	public void fire(FireStrategy strategy) {
+		strategy.fire(this);
 	}
 
 	public void die() {

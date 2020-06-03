@@ -6,7 +6,7 @@ import java.util.Random;
  * @author yibing
  *
  */
-public class main {
+public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		int initTankCount = Integer.parseInt(PropertyMgr.get("initTankCount").toString());
 		TankFrame tf = new TankFrame();
