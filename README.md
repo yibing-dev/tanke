@@ -107,7 +107,7 @@ Dir.values()[random.nextInt(4)];
 * 把配置文件加载类改为单例模式（静态内部类式）
 
 ##### 开发要点记录：
-* 单例模式总结： https://github.com/yibing-dev/DesignPatterns/blob/master/%E5%8D%95%E4%BE%8B.md
+* 单例模式总结： https://github.com/yibing-dev/DesignPatterns/blob/master/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.md
 
 ``` java
 //使用静态内部类只加载一次的特性实现单例
