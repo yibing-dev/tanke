@@ -2,6 +2,7 @@ package com.yibing.tank;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Properties;
 import java.util.Random;
 
 /**
@@ -87,7 +88,7 @@ public class Tank {
 		if (this.group == Group.Bad) {
 			if (random.nextInt(10) > 5) {
 				//this.fire(DefaultFireStrategy.getInstance());
-				this.fire(FourDirFireStrategy.getInstance());
+				this.fire(FireStrategyFactory.getStrategy("badFireStrategy"));
 			}
 			randomDir();
 		}

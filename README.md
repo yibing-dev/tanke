@@ -132,74 +132,76 @@ public class Mgr03 {
 * 定义坦克的发火策略，并且把策略实例定义为单例
 
 ##### 开发要点记录：
-* 策略模式总结： 
 
-* 定义一个发火策略的接口
+##### 策略的定义
+* 包含一个策略接口和一组实现这个接口的策略类。因为所有的策略类都实现相同的接口，所以，客户端代码基于接口而非实现编程，可以灵活地替换不同的策略
 
 ``` java
+//定义策略接口
 public interface FireStrategy {
-	void fire(Tank t);
+    void fire(Tank t);
 }
-```
 
-* 定义默认的发火策略
-
-``` java
+//实现策略接口
 public class DefaultFireStrategy implements FireStrategy {
-	//为了避免每次使用发火策略都new对象，因此设计为单例模式
-	private DefaultFireStrategy() {}
-	
-	
-	static class innerClass {
-		private static DefaultFireStrategy INSTANCE = new DefaultFireStrategy();
-	}
-	
-	static DefaultFireStrategy getInstance() {
-		return innerClass.INSTANCE;
-	}
+    //为了避免每次使用发火策略都new对象，因此设计为单例模式
+    private DefaultFireStrategy() {}
+    
+    static class innerClass {
+        private static DefaultFireStrategy INSTANCE = new DefaultFireStrategy();
+    }
+    
+    static DefaultFireStrategy getInstance() {
+        return innerClass.INSTANCE;
+    }
 
-	@Override
-	public void fire(Tank t) {
-		int bx = t.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-		int by = t.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-		new Bullet(bx, by, t.dir, t.tf, t.group);
-		if (t.group == Group.Good) {
-			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
-		}
-	}
+    @Override
+    public void fire(Tank t) {
+         //具体算法
+    }
+
 }
 
-```
-
-* 定义四个方向发火的发火策略
-
-``` java
+//实现策略接口
 public class FourDirFireStrategy implements FireStrategy {
 
-	private FourDirFireStrategy() {}
+    private FourDirFireStrategy() {}
 
-	private static class innerClass {
-		static FourDirFireStrategy INSTANCE = new FourDirFireStrategy();
-	}
+    private static class innerClass {
+        static FourDirFireStrategy INSTANCE = new FourDirFireStrategy();
+    }
 
-	static FourDirFireStrategy getInstance() {
-		return innerClass.INSTANCE;
-	}
+    static FourDirFireStrategy getInstance() {
+        return innerClass.INSTANCE;
+    }
 
-	@Override
-	public void fire(Tank t) {
-		int bx = t.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
-		int by = t.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-		Dir[] dir = Dir.values();
-		for (Dir d : dir) {
-			new Bullet(bx, by, d, t.tf, t.group);
-		}
-		if (t.group == Group.Good) {
-			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
-		}
-	}
+    @Override
+    public void fire(Tank t) {
+        //具体算法
+    }
+
 }
 ```
+##### 策略的创建
 
+* 因为策略模式会包含一组策略，一般会通过类型（type）来判断创建哪个策略来使用。为了封装创建逻辑，我们需要对外屏蔽创建细节。我们可以把所有的策略放到工厂类中，需要用的时候取一下就行
+
+```java
+public class FireStrategyFactory {
+    private static final Map<String, FireStrategy> strategies = new HashMap<>();
+
+    static {
+        strategies.put("goodFireStrategy", FourDirFireStrategy.getInstance());
+        strategies.put("badFireStrategy", DefaultFireStrategy.getInstance());
+    }
+
+    public static FireStrategy getStrategy(String type) {
+        if (type == null || type.isEmpty()) {
+            throw new IllegalArgumentException("type should not be empty.");
+        }
+        return strategies.get(type);
+    }
+}
+```
 
 
