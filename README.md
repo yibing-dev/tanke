@@ -135,4 +135,11 @@ public class Mgr03 {
 
 * 策略模式总结：https://github.com/yibing-dev/DesignPatterns/blob/master/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.md 
 
+## 2020/6/4
+
+##### 功能更新：
+* 引入策略工厂类
+
+##### 开发要点记录：
+
 
