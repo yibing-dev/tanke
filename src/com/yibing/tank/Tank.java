@@ -87,7 +87,6 @@ public class Tank {
 		}
 		if (this.group == Group.Bad) {
 			if (random.nextInt(10) > 5) {
-				//this.fire(DefaultFireStrategy.getInstance());
 				this.fire(FireStrategyFactory.getStrategy("badFireStrategy"));
 			}
 			randomDir();
