@@ -11,6 +11,13 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yibing.tank.abstractfactory.BaseBullet;
+import com.yibing.tank.abstractfactory.BaseExplode;
+import com.yibing.tank.abstractfactory.BaseTank;
+import com.yibing.tank.abstractfactory.DefaultFactory;
+import com.yibing.tank.abstractfactory.GameFactory;
+import com.yibing.tank.abstractfactory.RectFactory;
+
 /**
  * @author yibing
  *
@@ -22,16 +29,19 @@ public class TankFrame extends Frame {
 	private static final long serialVersionUID = 7176408429911310474L;
 	// 坦克
 	Tank myTank = new Tank(200, 400, Dir.DOWN, this, Group.Good, 15);
+	//BaseTank myTank = new RectFactory().createTank(200, 400, Dir.DOWN, Group.Good, this, 15);
 	// 子弹容器
-	List<Bullet> bullets = new ArrayList<>();
+	public List<BaseBullet> bullets = new ArrayList<>();
 	// 坦克容器
-	List<Tank> tanks = new ArrayList<>();
+	public List<Tank> tanks = new ArrayList<>();
 	// 爆炸集合
-	List<Explode> explodes = new ArrayList<>();
+	public List<BaseExplode> explodes = new ArrayList<>();
 
-	Dir dir = Dir.DOWN;
+	public Dir dir = Dir.DOWN;
 
-	static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
+	public static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
+
+	public GameFactory fg = new DefaultFactory();
 
 	public TankFrame() {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -96,8 +106,8 @@ public class TankFrame extends Frame {
 				bD = false;
 				break;
 			case KeyEvent.VK_CONTROL:
-				//myTank.fire(FourDirFireStrategy.getInstance());
-				myTank.fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
+				myTank.fire(FourDirFireStrategy.getInstance());
+				//myTank.fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
 				break;
 			}
 			setMainTankDir();
@@ -157,7 +167,7 @@ public class TankFrame extends Frame {
 		// 子弹和坦克的碰撞检测
 		for (int i = 0; i < bullets.size(); i++) {
 			for (int j = 0; j < tanks.size(); j++) {
-				Explode e = new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this);
+				Explode e = new Explode(tanks.get(j).x, tanks.get(j).y, this);
 				bullets.get(i).collidWidth(tanks.get(j));
 			}
 		}

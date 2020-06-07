@@ -1,5 +1,7 @@
 package com.yibing.tank;
 
+import com.yibing.tank.abstractfactory.RectFactory;
+
 /**
  * @createTime 2020年6月3日 下午12:39:17
  * @author yibing
@@ -22,6 +24,7 @@ public class DefaultFireStrategy implements FireStrategy {
 		int bx = t.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
 		int by = t.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 		new Bullet(bx, by, t.dir, t.tf, t.group);
+		//new RectFactory().createBullet(bx, by, t.dir, t.tf, t.group);
 		if (t.group == Group.Good) {
 			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
 		}

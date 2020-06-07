@@ -19,7 +19,5 @@ public class Main {
 			Thread.sleep(100);
 			tf.repaint();
 		}
-
 	}
-
 }

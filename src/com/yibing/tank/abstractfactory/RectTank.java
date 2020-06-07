@@ -1,19 +1,25 @@
-package com.yibing.tank;
+package com.yibing.tank.abstractfactory;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Properties;
 import java.util.Random;
 
-import com.yibing.tank.abstractfactory.BaseTank;
-import com.yibing.tank.abstractfactory.RectFactory;
+import com.yibing.tank.Audio;
+import com.yibing.tank.Bullet;
+import com.yibing.tank.Dir;
+import com.yibing.tank.FireStrategy;
+import com.yibing.tank.FireStrategyFactory;
+import com.yibing.tank.Group;
+import com.yibing.tank.ResourceMgr;
+import com.yibing.tank.Tank;
+import com.yibing.tank.TankFrame;
 
 /**
- * @author yibing
- *
- *         抽象类
- */
-public class Tank{
+* @Author yibing
+* @CreateTime 2020年6月7日 上午8:31:59
+* @Description 类描述:
+*/
+public class RectTank extends BaseTank {
 	public int x, y;
 	public Dir dir = Dir.DOWN;
 	private boolean moving = true;
@@ -27,7 +33,7 @@ public class Tank{
 	public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-	public Tank(int x, int y, Dir dir, TankFrame tf, Group group, int speed) {
+	public RectTank(int x, int y, Dir dir, TankFrame tf, Group group, int speed) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -89,9 +95,13 @@ public class Tank{
 			break;
 		}
 		if (this.group == Group.Bad) {
+//			if (random.nextInt(10) > 5) {
+//				this.fire(FireStrategyFactory.getStrategy("badFireStrategy"));
+//			}
 			if (random.nextInt(10) > 5) {
-				this.fire(FireStrategyFactory.getStrategy("badFireStrategy"));
+				this.fire();
 			}
+
 			randomDir();
 		}
 		boundsCheck();
@@ -125,12 +135,22 @@ public class Tank{
 	/**
 	 * @param strategy 开火策略
 	 */
+//	public void fire() {
+//		int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+//		int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+//		new RectFactory().createBullet(bx, by, this.dir, this.tf, this.group);
+//		if (this.group == Group.Good) {
+//			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+//		}
+//	}
+	
+	/**
+	 * @param strategy 开火策略
+	 */
 	public void fire(FireStrategy strategy) {
-		strategy.fire(this);
+		//strategy.fire(this);
 	}
-	
-	
-	
+
 	public void die() {
 		this.living = false;
 		tf.tanks.remove(this);
@@ -182,6 +202,16 @@ public class Tank{
 
 	public void setTf(TankFrame tf) {
 		this.tf = tf;
+	}
+
+	@Override
+	public void fire() {
+			int bx = this.x + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+			int by = this.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+			new RectFactory().createBullet(bx, by, this.dir, this.tf, this.group);
+			if (this.group == Group.Good) {
+				new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+			}
 	}
 
 }

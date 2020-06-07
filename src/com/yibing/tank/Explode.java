@@ -2,11 +2,13 @@ package com.yibing.tank;
 
 import java.awt.Graphics;
 
+import com.yibing.tank.abstractfactory.BaseExplode;
+
 /**
  * @author yibing
  *
  */
-public class Explode {
+public class Explode extends BaseExplode{
 
 	public static final int WIDTH = ResourceMgr.getInstance().explodes[0].getWidth();
 	public static final int HEIGHT = ResourceMgr.getInstance().explodes[0].getHeight();

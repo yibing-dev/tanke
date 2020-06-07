@@ -19,19 +19,19 @@ public class ResourceMgr {
 		private static ResourceMgr INSTANCE = new ResourceMgr();
 	}
 
-	static ResourceMgr getInstance() {
+	public static ResourceMgr getInstance() {
 		return ResourceMgrInner.INSTANCE;
 	}
 
 	// 坦克icon
-	static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
-	static BufferedImage badTankL, badTankU, badTankR, badTankD;
+	public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
+	public static BufferedImage badTankL, badTankU, badTankR, badTankD;
 	// 子弹icon
-	static BufferedImage bulletL, bulletU, bulletR, bulletD;
+	public static BufferedImage bulletL, bulletU, bulletR, bulletD;
 	// 定义一个ClassLoader，避免每一次都获取一次
-	static ClassLoader classLoader = null;
+	public static ClassLoader classLoader = null;
 
-	static BufferedImage[] explodes = new BufferedImage[16];
+	public static BufferedImage[] explodes = new BufferedImage[16];
 	// 定义静态代码块，在加载本类的时候回自动加载到内存里
 	static {
 		try {

@@ -1,16 +1,23 @@
-package com.yibing.tank;
+package com.yibing.tank.abstractfactory;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import com.yibing.tank.Audio;
+import com.yibing.tank.Dir;
+import com.yibing.tank.Explode;
+import com.yibing.tank.Group;
+import com.yibing.tank.ResourceMgr;
+import com.yibing.tank.Tank;
+import com.yibing.tank.TankFrame;
 import com.yibing.tank.abstractfactory.BaseBullet;
-import com.yibing.tank.abstractfactory.BaseTank;
 
 /**
  * @author yibing
  *
  */
-public class Bullet extends BaseBullet{
+public class RectBullet extends BaseBullet {
 	private static final int speed = 100;
 	private int x, y;
 	private Dir dir;
@@ -22,10 +29,10 @@ public class Bullet extends BaseBullet{
 
 	// 子弹活着
 	private boolean living = true;
-	TankFrame tf = null;
-	private Group group = Group.Bad;
+	public TankFrame tf = null;
+	public Group group = Group.Bad;
 
-	public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
+	public RectBullet(int x, int y, Dir dir, TankFrame tf, Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
@@ -42,24 +49,10 @@ public class Bullet extends BaseBullet{
 		if (!living) {
 			tf.bullets.remove(this);
 		}
-
-		switch (dir) {
-		case LEFT:
-			g.drawImage(ResourceMgr.bulletL, x, y, null);
-			break;
-		case RIGHT:
-			g.drawImage(ResourceMgr.bulletR, x, y, null);
-			break;
-		case UP:
-			g.drawImage(ResourceMgr.bulletU, x, y, null);
-			break;
-		case DOWN:
-			g.drawImage(ResourceMgr.bulletD, x, y, null);
-			break;
-		default:
-			break;
-
-		}
+		Color c = g.getColor();
+		g.setColor(Color.yellow);
+		g.fillRect(x, y, 20, 20);
+		g.setColor(c);
 		move();
 	}
 
@@ -108,7 +101,7 @@ public class Bullet extends BaseBullet{
 			this.tf.explodes.add(tf.fg.createExplode(ex, ey, tf));
 			// 销毁坦克和子弹
 			tank.die();
-			this.die();       
+			this.die();
 			new Thread(() -> {
 				new Audio("audio/explode.wav").play();
 			}).start();
@@ -131,5 +124,4 @@ public class Bullet extends BaseBullet{
 		this.group = group;
 	}
 
-	
 }
