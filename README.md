@@ -158,10 +158,6 @@ public class Mgr03 {
 * 静态工厂
 * 抽象工厂
 
-* 可以做xx的定义为接口
-* 是名词的定义为抽象类 
-
-
-* 工厂模式总结：
+* 工厂模式总结：https://github.com/yibing-dev/DesignPatterns/blob/master/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.md
 
 
