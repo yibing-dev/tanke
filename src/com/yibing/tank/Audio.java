@@ -19,7 +19,7 @@ public class Audio {
 		try {
 
 			while (true) {
-				int len = 0;
+				int len = 0; 
 				sourceDataLine.open(audioFormat, 1024 * 1024 * 15);
 				sourceDataLine.start();
 				//System.out.println(audioInputStream.markSupported());
