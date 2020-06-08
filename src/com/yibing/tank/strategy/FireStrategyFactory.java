@@ -1,4 +1,4 @@
-package com.yibing.tank;
+package com.yibing.tank.strategy;
 
 import java.util.HashMap;
 import java.util.Map;

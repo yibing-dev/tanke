@@ -7,7 +7,7 @@ import java.awt.Rectangle;
  * @author yibing
  *
  */
-public class Bullet {
+public class Bullet extends GameObject{
 	private static final int speed = 100;
 	private int x, y;
 	private Dir dir;

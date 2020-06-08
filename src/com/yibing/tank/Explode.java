@@ -6,7 +6,7 @@ import java.awt.Graphics;
  * @author yibing
  *
  */
-public class Explode {
+public class Explode extends GameObject{
 
 	public static final int WIDTH = ResourceMgr.getInstance().explodes[0].getWidth();
 	public static final int HEIGHT = ResourceMgr.getInstance().explodes[0].getHeight();

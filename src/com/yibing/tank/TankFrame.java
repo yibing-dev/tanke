@@ -11,6 +11,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yibing.tank.strategy.FireStrategyFactory;
+
 /**
  * @author yibing
  *

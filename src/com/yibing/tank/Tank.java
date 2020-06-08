@@ -5,21 +5,24 @@ import java.awt.Rectangle;
 import java.util.Properties;
 import java.util.Random;
 
+import com.yibing.tank.strategy.FireStrategy;
+import com.yibing.tank.strategy.FireStrategyFactory;
+
 /**
  * @author yibing
  *
  *         抽象类
  */
-public class Tank {
-	int x, y;
-	Dir dir = Dir.DOWN;
+public class Tank extends GameObject{
+	public int x, y;
+	public Dir dir = Dir.DOWN;
 	private boolean moving = true;
 	private boolean living = true;
 	private Random random = new Random();
 	private int speed = 10;
-	Group group = Group.Bad;
+	public Group group = Group.Bad;
 	Rectangle rect = new Rectangle();
-	GameModel gm;
+	public GameModel gm;
 
 	public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
