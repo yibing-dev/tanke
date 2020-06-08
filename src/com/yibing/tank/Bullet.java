@@ -19,25 +19,25 @@ public class Bullet {
 
 	// 子弹活着
 	private boolean living = true;
-	TankFrame tf = null;
 	private Group group = Group.Bad;
+	private GameModel gm;
 
-	public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
+	public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.tf = tf;
+		this.gm = gm;
 		this.group = group;
 		this.rect.x = this.x;
 		this.rect.y = this.y;
 		this.rect.width = this.WIDTH;
 		this.rect.height = this.HEIGHT;
-		tf.bullets.add(this);
+		gm.bullets.add(this);
 	}
 
 	public void paint(Graphics g) {
 		if (!living) {
-			tf.bullets.remove(this);
+			gm.bullets.remove(this);
 		}
 
 		switch (dir) {
@@ -102,8 +102,8 @@ public class Bullet {
 			// 爆炸
 			int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 			int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-			Explode e = new Explode(ex, ey, tf);
-			this.tf.explodes.add(e);
+			Explode e = new Explode(ex, ey, gm);
+			this.gm.explodes.add(e);
 			// 销毁坦克和子弹
 			tank.die();
 			this.die();
@@ -115,7 +115,7 @@ public class Bullet {
 	// 碰撞之后让子弹销毁
 	private void die() {
 		this.living = false;
-		tf.bullets.remove(this);
+		gm.bullets.remove(this);
 	}
 
 	public Group getGroup() {

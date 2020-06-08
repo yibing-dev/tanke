@@ -14,22 +14,22 @@ public class Tank {
 	int x, y;
 	Dir dir = Dir.DOWN;
 	private boolean moving = true;
-	TankFrame tf = null;
 	private boolean living = true;
 	private Random random = new Random();
 	private int speed = 10;
 	Group group = Group.Bad;
 	Rectangle rect = new Rectangle();
+	GameModel gm;
 
 	public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-	public Tank(int x, int y, Dir dir, TankFrame tf, Group group, int speed) {
+	public Tank(int x, int y, Dir dir, GameModel gm, Group group, int speed) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.tf = tf;
+		this.gm = gm;
 		this.group = group;
 		this.speed = speed;
 		this.rect.x = this.x;
@@ -129,7 +129,7 @@ public class Tank {
 
 	public void die() {
 		this.living = false;
-		tf.tanks.remove(this);
+		gm.tanks.remove(this);
 	}
 
 	public Dir getDir() {
@@ -172,12 +172,11 @@ public class Tank {
 		this.group = group;
 	}
 
-	public TankFrame getTf() {
-		return tf;
+	public GameModel getGm() {
+		return gm;
 	}
 
-	public void setTf(TankFrame tf) {
-		this.tf = tf;
+	public void setGm(GameModel gm) {
+		this.gm = gm;
 	}
-
 }

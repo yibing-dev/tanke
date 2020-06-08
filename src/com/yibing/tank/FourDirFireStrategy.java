@@ -22,7 +22,7 @@ public class FourDirFireStrategy implements FireStrategy {
 		int by = t.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 		Dir[] dir = Dir.values();
 		for (Dir d : dir) {
-			new Bullet(bx, by, d, t.tf, t.group);
+			new Bullet(bx, by, d, t.gm, t.group);
 		}
 		if (t.group == Group.Good) {
 			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();

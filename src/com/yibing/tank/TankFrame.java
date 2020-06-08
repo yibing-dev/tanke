@@ -20,14 +20,9 @@ public class TankFrame extends Frame {
 	 * 
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
-	// 坦克
-	Tank myTank = new Tank(200, 400, Dir.DOWN, this, Group.Good, 15);
-	// 子弹容器
-	List<Bullet> bullets = new ArrayList<>();
-	// 坦克容器
-	List<Tank> tanks = new ArrayList<>();
-	// 爆炸集合
-	List<Explode> explodes = new ArrayList<>();
+	
+	GameModel gameMdoel = new GameModel();
+	
 
 	Dir dir = Dir.DOWN;
 
@@ -97,13 +92,16 @@ public class TankFrame extends Frame {
 				break;
 			case KeyEvent.VK_CONTROL:
 				//myTank.fire(FourDirFireStrategy.getInstance());
-				myTank.fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
+				//gameMdoel.myTank.fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
+				
+				gameMdoel.getMainTank().fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
 				break;
 			}
 			setMainTankDir();
 		}
 
 		private void setMainTankDir() {
+			Tank myTank = gameMdoel.getMainTank();
 			if (!bL && !bR && !bU && !bD) {
 				myTank.setMoving(false);
 			} else {
@@ -138,36 +136,6 @@ public class TankFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.WHITE);
-		g.drawString("子弹的数量" + bullets.size(), 10, 60);
-		g.drawString("敌方坦克的数量" + tanks.size(), 10, 80);
-		g.drawString("爆炸的数量" + explodes.size(), 10, 100);
-		myTank.paint(g);
-		g.setColor(c);
-		// for循环遍历，可以规避集合并发异常
-		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).paint(g);
-		}
-		// 画敌方坦克
-		for (int i = 0; i < tanks.size(); i++) {
-			tanks.get(i).paint(g);
-		}
-
-		// 子弹和坦克的碰撞检测
-		for (int i = 0; i < bullets.size(); i++) {
-			for (int j = 0; j < tanks.size(); j++) {
-				Explode e = new Explode(tanks.get(j).getX(), tanks.get(j).getY(), this);
-				bullets.get(i).collidWidth(tanks.get(j));
-			}
-		}
-
-		for (int i = 0; i < explodes.size(); i++) {
-			explodes.get(i).paint(g);
-		}
-		/*
-		 * 迭代遍历，如果其他操作有对该容器执行删除操作，会导致并发操作异常 for (Bullet bullet : bullets) {
-		 * bullet.paint(g); }
-		 */
+		gameMdoel.paint(g);
 	}
 }
