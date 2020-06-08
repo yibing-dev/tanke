@@ -163,8 +163,10 @@ public class Mgr03 {
 ## 2020/6/8
 
 ##### 功能更新：
+
+* 抽象出GameModel，将model和view分离，同时将GameModel作为facade负责与Frame打交道，同时负责内部事务
 * TankFrame解决了添加新游戏物体的问题
 * TankFrame只做游戏展示，具体内部计算由GameModel负责
-* 
+
 
 ##### 开发要点记录：
