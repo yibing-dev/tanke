@@ -1,4 +1,4 @@
-package com.yibing.tank;
+package com.yibing.tank.mgr;
 /**
 * @Author yibing
 * @CreateTime 2020年5月31日 下午9:29:34

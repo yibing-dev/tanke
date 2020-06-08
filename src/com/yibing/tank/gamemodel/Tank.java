@@ -1,10 +1,13 @@
-package com.yibing.tank;
+package com.yibing.tank.gamemodel;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Properties;
 import java.util.Random;
 
+import com.yibing.Utils.Group;
+import com.yibing.tank.TankFrame;
+import com.yibing.tank.mgr.ResourceMgr;
 import com.yibing.tank.strategy.FireStrategy;
 import com.yibing.tank.strategy.FireStrategyFactory;
 

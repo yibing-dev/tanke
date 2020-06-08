@@ -1,6 +1,8 @@
-package com.yibing.tank;
+package com.yibing.tank.gamemodel;
 
 import java.awt.Graphics;
+
+import com.yibing.tank.mgr.ResourceMgr;
 
 /**
  * @author yibing

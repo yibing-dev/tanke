@@ -1,4 +1,4 @@
-package com.yibing.tank;
+package com.yibing.tank.gamemodel;
 
 import java.awt.Graphics;
 

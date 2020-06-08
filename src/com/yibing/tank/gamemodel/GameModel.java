@@ -1,10 +1,13 @@
-package com.yibing.tank;
+package com.yibing.tank.gamemodel;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.yibing.Utils.Group;
+import com.yibing.tank.mgr.PropertyMgr;
 
 /**
 * @Author yibing
@@ -15,11 +18,11 @@ public class GameModel {
 	// 坦克
 	private Tank myTank = new Tank(200, 400, Dir.DOWN, this, Group.Good, 15);
 	// 子弹容器
-	List<Bullet> bullets = new ArrayList<>();
+	public List<Bullet> bullets = new ArrayList<>();
 	// 敌方坦克容器
-	List<Tank> tanks = new ArrayList<>();
+	public List<Tank> tanks = new ArrayList<>();
 	// 爆炸集合
-	List<Explode> explodes = new ArrayList<>();
+	public List<Explode> explodes = new ArrayList<>();
 	
 	public GameModel() {
 		int initTankCount = Integer.parseInt(PropertyMgr.get("initTankCount").toString());

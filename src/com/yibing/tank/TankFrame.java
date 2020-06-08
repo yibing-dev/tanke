@@ -11,6 +11,9 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yibing.tank.gamemodel.Dir;
+import com.yibing.tank.gamemodel.GameModel;
+import com.yibing.tank.gamemodel.Tank;
 import com.yibing.tank.strategy.FireStrategyFactory;
 
 /**
@@ -28,7 +31,9 @@ public class TankFrame extends Frame {
 
 	Dir dir = Dir.DOWN;
 
-	static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
+	public static final int GAME_WIDTH = 1000;
+
+	public static final int GAME_HEIGHT = 800;
 
 	public TankFrame() {
 		setSize(GAME_WIDTH, GAME_HEIGHT);

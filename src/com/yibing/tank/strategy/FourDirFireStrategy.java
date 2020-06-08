@@ -1,10 +1,10 @@
 package com.yibing.tank.strategy;
 
-import com.yibing.tank.Audio;
-import com.yibing.tank.Bullet;
-import com.yibing.tank.Dir;
-import com.yibing.tank.Group;
-import com.yibing.tank.Tank;
+import com.yibing.Utils.Group;
+import com.yibing.tank.gamemodel.Audio;
+import com.yibing.tank.gamemodel.Bullet;
+import com.yibing.tank.gamemodel.Dir;
+import com.yibing.tank.gamemodel.Tank;
 
 /**
  * @createTime 2020年6月3日 下午1:00:27

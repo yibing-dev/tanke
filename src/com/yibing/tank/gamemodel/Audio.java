@@ -1,5 +1,5 @@
 
-package com.yibing.tank;
+package com.yibing.tank.gamemodel;
 
 import java.io.IOException;
 
