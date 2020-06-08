@@ -164,9 +164,12 @@ public class Mgr03 {
 
 ##### 功能更新：
 
-* 抽象出GameModel，将model和view分离，同时将GameModel作为facade负责与Frame打交道，同时负责内部事务
+* 引入门面模式，抽象出GameModel，将model和view分离，同时将GameModel作为facade负责与Frame打交道，同时负责内部事务
 * TankFrame解决了添加新游戏物体的问题
 * TankFrame只做游戏展示，具体内部计算由GameModel负责
 
 
 ##### 开发要点记录：
+* 门面模式总结：https://github.com/yibing-dev/DesignPatterns/blob/master/%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F.md
+
+
