@@ -24,7 +24,7 @@ public class Tank extends GameObject{
 	private Random random = new Random();
 	private int speed = 10;
 	public Group group = Group.Bad;
-	Rectangle rect = new Rectangle();
+	public Rectangle rect = new Rectangle();
 	public GameModel gm;
 
 	public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
@@ -135,7 +135,7 @@ public class Tank extends GameObject{
 
 	public void die() {
 		this.living = false;
-		gm.tanks.remove(this);
+		gm.remove(this);
 	}
 
 	public Dir getDir() {

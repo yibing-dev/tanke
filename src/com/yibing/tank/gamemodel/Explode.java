@@ -28,7 +28,7 @@ public class Explode extends GameObject{
 	public void paint(Graphics g) {
 		g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 		if (step >= ResourceMgr.explodes.length) {// 遍历完图片之后，自动移除这个对象，即爆炸消失
-			gm.explodes.remove(this);
+			gm.remove(this);
 		}
 	}
 

@@ -19,12 +19,12 @@ public class Bullet extends GameObject{
 	public static final int WIDTH = ResourceMgr.bulletD.getWidth();
 	public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
 
-	Rectangle rect = new Rectangle();
+	public Rectangle rect = new Rectangle();
 
 	// 子弹活着
 	private boolean living = true;
 	private Group group = Group.Bad;
-	private GameModel gm;
+	public GameModel gm;
 
 	public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
 		this.x = x;
@@ -36,12 +36,12 @@ public class Bullet extends GameObject{
 		this.rect.y = this.y;
 		this.rect.width = this.WIDTH;
 		this.rect.height = this.HEIGHT;
-		gm.bullets.add(this);
+		gm.add(this);
 	}
 
 	public void paint(Graphics g) {
 		if (!living) {
-			gm.bullets.remove(this);
+			gm.remove(this);
 		}
 
 		switch (dir) {
@@ -94,32 +94,32 @@ public class Bullet extends GameObject{
 	}
 
 	// 子弹和坦克碰撞检测
-	public boolean collidWidth(Tank tank) {
-		// 如果子弹和坦克是一伙的，则不销毁坦克
-		if (this.getGroup() == tank.getGroup()) {
-			return false;
-		}
-		// TODO：用一个子弹的位置
-		// 根据字段位置和子弹的宽高，以及坦克的位置和宽高生成两个矩形
-		// 判断两个矩形是否相交，如果相交，则说明子弹和坦克是撞在一起了
-		if (this.rect.intersects(tank.rect)) {
-			// 爆炸
-			int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-			int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-			Explode e = new Explode(ex, ey, gm);
-			this.gm.explodes.add(e);
-			// 销毁坦克和子弹
-			tank.die();
-			this.die();
-			return true;
-		}
-		return false;
-	}
+//	public boolean collidWidth(Tank tank) {
+//		// 如果子弹和坦克是一伙的，则不销毁坦克
+//		if (this.getGroup() == tank.getGroup()) {
+//			return false;
+//		}
+//		// TODO：用一个子弹的位置
+//		// 根据字段位置和子弹的宽高，以及坦克的位置和宽高生成两个矩形
+//		// 判断两个矩形是否相交，如果相交，则说明子弹和坦克是撞在一起了
+//		if (this.rect.intersects(tank.rect)) {
+//			// 爆炸
+//			int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+//			int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+//			Explode e = new Explode(ex, ey, gm);
+//			this.gm.add(e);
+//			// 销毁坦克和子弹
+//			tank.die();
+//			this.die();
+//			return true;
+//		}
+//		return false;
+//	}
 
 	// 碰撞之后让子弹销毁
-	private void die() {
+	public void die() {
 		this.living = false;
-		gm.bullets.remove(this);
+		gm.remove(this);
 	}
 
 	public Group getGroup() {
