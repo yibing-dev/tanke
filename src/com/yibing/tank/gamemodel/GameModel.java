@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.yibing.Utils.Group;
-import com.yibing.tank.cor.BulletTankCollider;
-import com.yibing.tank.cor.Collider;
+import com.yibing.tank.collider.BulletTankCollider;
+import com.yibing.tank.collider.Collider;
 import com.yibing.tank.mgr.PropertyMgr;
 
 /**

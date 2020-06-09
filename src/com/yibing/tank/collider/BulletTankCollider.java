@@ -1,4 +1,4 @@
-package com.yibing.tank.cor;
+package com.yibing.tank.collider;
 
 import com.yibing.tank.gamemodel.Bullet;
 import com.yibing.tank.gamemodel.Explode;
