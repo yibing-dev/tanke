@@ -28,7 +28,7 @@ public class GameModel {
 	
 	private List<GameObject>objects = new ArrayList<>();
 	
-	Collider c = new BulletTankCollider();
+	Collider collider = new BulletTankCollider();
 	
 	public GameModel() {
 		int initTankCount = Integer.parseInt(PropertyMgr.get("initTankCount").toString());
@@ -65,7 +65,7 @@ public class GameModel {
 			for (int j = i+1; j < objects.size(); j++) {
 				GameObject o1 = objects.get(i);
 				GameObject o2 = objects.get(j);
-				new BulletTankCollider().collider(o1, o2);
+				collider.collider(o1, o2);
 			}
 		}
 		
