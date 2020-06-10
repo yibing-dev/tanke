@@ -8,5 +8,5 @@ import com.yibing.tank.gamemodel.GameObject;
  * @Description 类描述:
  */
 public interface Collider {
-	void collider(GameObject o1, GameObject o2);
+	boolean collider(GameObject o1, GameObject o2);
 }

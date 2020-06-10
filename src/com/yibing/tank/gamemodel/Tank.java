@@ -185,4 +185,21 @@ public class Tank extends GameObject{
 	public void setGm(GameModel gm) {
 		this.gm = gm;
 	}
+
+	public Rectangle getRect() {
+		return rect;
+	}
+
+	public void setRect(Rectangle rect) {
+		this.rect = rect;
+	}
+	
+	public void stop() {
+		this.moving = false;
+	}
+	
+	public void relive() {
+		this.moving = true;
+	}
+	
 }

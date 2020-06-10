@@ -9,6 +9,8 @@ import java.util.Random;
 import com.yibing.Utils.Group;
 import com.yibing.tank.collider.BulletTankCollider;
 import com.yibing.tank.collider.Collider;
+import com.yibing.tank.collider.ColliderChain;
+import com.yibing.tank.collider.TankTankCollider;
 import com.yibing.tank.mgr.PropertyMgr;
 
 /**
@@ -28,7 +30,10 @@ public class GameModel {
 	
 	private List<GameObject>objects = new ArrayList<>();
 	
-	Collider collider = new BulletTankCollider();
+	//碰撞责任链
+	ColliderChain chain = new ColliderChain();
+	
+	
 	
 	public GameModel() {
 		int initTankCount = Integer.parseInt(PropertyMgr.get("initTankCount").toString());
@@ -65,7 +70,7 @@ public class GameModel {
 			for (int j = i+1; j < objects.size(); j++) {
 				GameObject o1 = objects.get(i);
 				GameObject o2 = objects.get(j);
-				collider.collider(o1, o2);
+				chain.collider(o1,o2);
 			}
 		}
 		

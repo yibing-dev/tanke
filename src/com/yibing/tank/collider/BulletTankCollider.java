@@ -13,14 +13,14 @@ import com.yibing.tank.gamemodel.Tank;
 public class BulletTankCollider implements Collider {
 
 	@Override
-	public void collider(GameObject o1, GameObject o2) {
+	public boolean collider(GameObject o1, GameObject o2) {
 		if (o1 instanceof Bullet && o2 instanceof Tank) {
 			Bullet b = (Bullet) o1;
 			Tank t = (Tank) o2;
-
+			
 			// 如果子弹和坦克是一伙的，则不销毁坦克
 			if (b.getGroup() == t.getGroup()) {
-				return;
+				return true;
 			}
 			// TODO：用一个子弹的位置
 			// 根据字段位置和子弹的宽高，以及坦克的位置和宽高生成两个矩形
@@ -34,12 +34,12 @@ public class BulletTankCollider implements Collider {
 				// 销毁坦克和子弹
 				t.die();
 				b.die();
+				return false;
 			}
 		} else if (o1 instanceof Tank && o2 instanceof Bullet) {
 			this.collider(o2, o1);
-		} else {
-			return;
-		}
+		} 
+		return true;
 	}
 
 }
