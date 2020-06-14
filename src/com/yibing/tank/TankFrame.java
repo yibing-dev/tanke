@@ -25,9 +25,8 @@ public class TankFrame extends Frame {
 	 * 
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
-	
-	GameModel gameMdoel = new GameModel();
-	
+
+	GameModel gameMdoel = GameModel.getInstance();
 
 	Dir dir = Dir.DOWN;
 
@@ -98,9 +97,6 @@ public class TankFrame extends Frame {
 				bD = false;
 				break;
 			case KeyEvent.VK_CONTROL:
-				//myTank.fire(FourDirFireStrategy.getInstance());
-				//gameMdoel.myTank.fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
-				
 				gameMdoel.getMainTank().fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
 				break;
 			}

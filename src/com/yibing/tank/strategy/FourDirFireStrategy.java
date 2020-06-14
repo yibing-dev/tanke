@@ -12,7 +12,8 @@ import com.yibing.tank.gamemodel.Tank;
  */
 public class FourDirFireStrategy implements FireStrategy {
 
-	private FourDirFireStrategy() {}
+	private FourDirFireStrategy() {
+	}
 
 	private static class innerClass {
 		static FourDirFireStrategy INSTANCE = new FourDirFireStrategy();
@@ -28,7 +29,7 @@ public class FourDirFireStrategy implements FireStrategy {
 		int by = t.y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 		Dir[] dir = Dir.values();
 		for (Dir d : dir) {
-			new Bullet(bx, by, d, t.gm, t.group);
+			new Bullet(bx, by, d, t.group, 30);
 		}
 		if (t.group == Group.Good) {
 			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();

@@ -2,6 +2,7 @@ package com.yibing.tank.collider;
 
 import com.yibing.tank.gamemodel.Bullet;
 import com.yibing.tank.gamemodel.Explode;
+import com.yibing.tank.gamemodel.GameModel;
 import com.yibing.tank.gamemodel.GameObject;
 import com.yibing.tank.gamemodel.Tank;
 
@@ -29,15 +30,15 @@ public class BulletTankCollider implements Collider {
 				// 爆炸
 				int ex = t.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 				int ey = t.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-				Explode e = new Explode(ex, ey, b.gm);
-				b.gm.add(e);
+				Explode e = new Explode(ex, ey);
+				GameModel.getInstance().add(e);
 				// 销毁坦克和子弹
 				t.die();
 				b.die();
 				return false;
 			}
 		} else if (o1 instanceof Tank && o2 instanceof Bullet) {
-			this.collider(o2, o1);
+			return this.collider(o2, o1);
 		} 
 		return true;
 	}

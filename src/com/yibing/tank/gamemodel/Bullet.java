@@ -11,8 +11,8 @@ import com.yibing.tank.mgr.ResourceMgr;
  * @author yibing
  *
  */
-public class Bullet extends GameObject{
-	private static final int speed = 100;
+public class Bullet extends GameObject {
+	private static int speed = 30;
 	private int x, y;
 	private Dir dir;
 
@@ -24,24 +24,23 @@ public class Bullet extends GameObject{
 	// 子弹活着
 	private boolean living = true;
 	private Group group = Group.Bad;
-	public GameModel gm;
 
-	public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
+	public Bullet(int x, int y, Dir dir, Group group,int speed) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.gm = gm;
+		this.speed = speed;
 		this.group = group;
 		this.rect.x = this.x;
 		this.rect.y = this.y;
 		this.rect.width = this.WIDTH;
 		this.rect.height = this.HEIGHT;
-		gm.add(this);
+		GameModel.getInstance().add(this);
 	}
 
 	public void paint(Graphics g) {
 		if (!living) {
-			gm.remove(this);
+			GameModel.getInstance().remove(this);
 		}
 
 		switch (dir) {
@@ -93,33 +92,10 @@ public class Bullet extends GameObject{
 		}
 	}
 
-	// 子弹和坦克碰撞检测
-//	public boolean collidWidth(Tank tank) {
-//		// 如果子弹和坦克是一伙的，则不销毁坦克
-//		if (this.getGroup() == tank.getGroup()) {
-//			return false;
-//		}
-//		// TODO：用一个子弹的位置
-//		// 根据字段位置和子弹的宽高，以及坦克的位置和宽高生成两个矩形
-//		// 判断两个矩形是否相交，如果相交，则说明子弹和坦克是撞在一起了
-//		if (this.rect.intersects(tank.rect)) {
-//			// 爆炸
-//			int ex = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-//			int ey = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-//			Explode e = new Explode(ex, ey, gm);
-//			this.gm.add(e);
-//			// 销毁坦克和子弹
-//			tank.die();
-//			this.die();
-//			return true;
-//		}
-//		return false;
-//	}
-
 	// 碰撞之后让子弹销毁
 	public void die() {
 		this.living = false;
-		gm.remove(this);
+		GameModel.getInstance().remove(this);
 	}
 
 	public Group getGroup() {

@@ -16,32 +16,32 @@ import com.yibing.tank.strategy.FireStrategyFactory;
  *
  *         抽象类
  */
-public class Tank extends GameObject{
+public class Tank extends GameObject {
 	public int x, y;
+	public int oldX, oldY;// 记录
 	public Dir dir = Dir.DOWN;
 	private boolean moving = true;
 	private boolean living = true;
 	private Random random = new Random();
-	private int speed = 10;
+	private int speed = 1;
 	public Group group = Group.Bad;
 	public Rectangle rect = new Rectangle();
-	public GameModel gm;
 
 	public static final int WIDTH = ResourceMgr.goodTankU.getWidth();
 	public static final int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
-	public Tank(int x, int y, Dir dir, GameModel gm, Group group, int speed) {
+	public Tank(int x, int y, Dir dir, Group group, int speed) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.gm = gm;
 		this.group = group;
 		this.speed = speed;
 		this.rect.x = this.x;
 		this.rect.y = this.y;
 		this.rect.height = this.HEIGHT;
 		this.rect.width = this.WIDTH;
+		GameModel.getInstance().add(this);
 	}
 
 	public void paint(Graphics g) {
@@ -69,6 +69,9 @@ public class Tank extends GameObject{
 	}
 
 	private void move() {
+		// 记录移动之前的位置
+		oldX = x;
+		oldY = y;
 		if (!living) {
 			return;
 		}
@@ -93,7 +96,7 @@ public class Tank extends GameObject{
 		}
 		if (this.group == Group.Bad) {
 			if (random.nextInt(10) > 5) {
-				//this.fire(DefaultFireStrategy.getInstance());
+				// this.fire(DefaultFireStrategy.getInstance());
 				this.fire(FireStrategyFactory.getStrategy("badFireStrategy"));
 			}
 			randomDir();
@@ -135,7 +138,12 @@ public class Tank extends GameObject{
 
 	public void die() {
 		this.living = false;
-		gm.remove(this);
+		GameModel.getInstance().remove(this);
+	}
+
+	public void back() {
+		x = oldX;
+		y = oldY;
 	}
 
 	public Dir getDir() {
@@ -178,14 +186,6 @@ public class Tank extends GameObject{
 		this.group = group;
 	}
 
-	public GameModel getGm() {
-		return gm;
-	}
-
-	public void setGm(GameModel gm) {
-		this.gm = gm;
-	}
-
 	public Rectangle getRect() {
 		return rect;
 	}
@@ -193,13 +193,13 @@ public class Tank extends GameObject{
 	public void setRect(Rectangle rect) {
 		this.rect = rect;
 	}
-	
+
 	public void stop() {
 		this.moving = false;
 	}
-	
+
 	public void relive() {
 		this.moving = true;
 	}
-	
+
 }
