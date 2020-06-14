@@ -180,4 +180,4 @@ public class Mgr03 {
 *  将坦克与坦克碰撞，子弹与坦克碰撞，子弹与墙碰撞，坦克与墙碰撞的逻辑分别抽离为各自的碰撞逻辑，并穿成一条链
 
 ##### 开发要点记录：
-* 责任链模式总结：
+* 责任链模式总结：https://github.com/yibing-dev/DesignPatterns/blob/master/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F.md
