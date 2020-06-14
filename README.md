@@ -181,3 +181,15 @@ public class Mgr03 {
 
 ##### 开发要点记录：
 * 责任链模式总结：https://github.com/yibing-dev/DesignPatterns/blob/master/%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F.md
+
+## 2020/6/15
+
+##### 功能更新：
+
+*  引入装饰器模式
+*  将部分代码重构
+
+##### 开发要点记录：
+* 装饰器模式总结：https://github.com/yibing-dev/DesignPatterns/blob/master/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F.md
+
+
