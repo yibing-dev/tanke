@@ -17,7 +17,7 @@ import com.yibing.tank.strategy.FireStrategyFactory;
  *         抽象类
  */
 public class Tank extends GameObject {
-	public int x, y;
+	//public int x, y;
 	public int oldX, oldY;// 记录
 	public Dir dir = Dir.DOWN;
 	private boolean moving = true;
@@ -200,6 +200,18 @@ public class Tank extends GameObject {
 
 	public void relive() {
 		this.moving = true;
+	}
+
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return WIDTH;
+	}
+
+	@Override
+	public int getHight() {
+		// TODO Auto-generated method stub
+		return HEIGHT;
 	}
 
 }

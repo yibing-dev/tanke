@@ -34,7 +34,7 @@ public class FourDirFireStrategy implements FireStrategy {
 		if (t.group == Group.Good) {
 			new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
 		}
-
+ 
 	}
 
 }

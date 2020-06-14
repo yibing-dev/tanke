@@ -13,7 +13,6 @@ import com.yibing.tank.mgr.ResourceMgr;
  */
 public class Bullet extends GameObject {
 	private static int speed = 30;
-	private int x, y;
 	private Dir dir;
 
 	public static final int WIDTH = ResourceMgr.bulletD.getWidth();
@@ -104,6 +103,16 @@ public class Bullet extends GameObject {
 
 	public void setGroup(Group group) {
 		this.group = group;
+	}
+
+	@Override
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	@Override
+	public int getHight() {
+		return HEIGHT;
 	}
 
 }
