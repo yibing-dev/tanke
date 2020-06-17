@@ -14,6 +14,8 @@ import java.util.List;
 import com.yibing.tank.gamemodel.Dir;
 import com.yibing.tank.gamemodel.GameModel;
 import com.yibing.tank.gamemodel.Tank;
+import com.yibing.tank.observer.FireObserver;
+import com.yibing.tank.observer.Observer;
 import com.yibing.tank.strategy.FireStrategyFactory;
 
 /**
@@ -25,7 +27,9 @@ public class TankFrame extends Frame {
 	 * 
 	 */
 	private static final long serialVersionUID = 7176408429911310474L;
-
+	
+	List<Observer> observers = new ArrayList<>();
+	
 	GameModel gameMdoel = GameModel.getInstance();
 
 	Dir dir = Dir.DOWN;
@@ -40,7 +44,7 @@ public class TankFrame extends Frame {
 		setTitle("̹坦克大戰");
 		setVisible(true);
 		this.addKeyListener(new MyKeyListener());
-
+		this.addObserver(new FireObserver(this.gameMdoel));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -48,7 +52,17 @@ public class TankFrame extends Frame {
 			}
 		});
 	}
-
+	
+	public void addObserver(Observer observer) {
+		this.observers.add(observer);
+	}
+	
+	public void notifyAlls() {
+		for (Observer observer : observers) {
+			observer.todo();
+		}
+	}
+	
 	class MyKeyListener extends KeyAdapter {
 		boolean bL = false;
 		boolean bR = false;
@@ -97,7 +111,8 @@ public class TankFrame extends Frame {
 				bD = false;
 				break;
 			case KeyEvent.VK_CONTROL:
-				gameMdoel.getMainTank().fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
+				//gameMdoel.getMainTank().fire(FireStrategyFactory.getStrategy("goodFireStrategy"));
+				notifyAlls();
 				break;
 			}
 			setMainTankDir();
