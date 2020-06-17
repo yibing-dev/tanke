@@ -1,7 +1,5 @@
 package com.yibing.tank.observer;
 
-import java.awt.event.KeyEvent;
-
 import com.yibing.tank.gamemodel.GameModel;
 
 /**
