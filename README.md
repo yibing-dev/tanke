@@ -192,4 +192,14 @@ public class Mgr03 {
 ##### 开发要点记录：
 * 装饰器模式总结：https://github.com/yibing-dev/DesignPatterns/blob/master/%E8%A3%85%E9%A5%B0%E6%A8%A1%E5%BC%8F.md
 
+## 2020/6/17
+
+##### 功能更新：
+
+*  引入观察者模式
+* 观察Ctrl按键
+
+##### 开发要点记录：
+* 观察者模式总结：
+
 
