@@ -200,6 +200,6 @@ public class Mgr03 {
 * 观察Ctrl按键
 
 ##### 开发要点记录：
-* 观察者模式总结：
+* 观察者模式总结：https://github.com/yibing-dev/DesignPatterns/blob/master/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.md
 
 
